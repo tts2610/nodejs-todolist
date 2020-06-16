@@ -1,0 +1,11 @@
+[
+    { "todo": "Have breakfast", "status": true },
+    { "todo": "Have lunch", "status": false },
+    { "todo": "grab lunch", "status": false },
+    { "todo": "going home", "status": false },
+    { "todo": "finish", "status": false },
+    { "todo": "finish", "status": false },
+    { "todo": "finish", "status": false },
+    { "todo": "finish", "status": false },
+    { "todo": "finish", "status": false }
+]

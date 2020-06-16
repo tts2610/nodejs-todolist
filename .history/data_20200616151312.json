@@ -1,0 +1,4 @@
+[
+    { "id": 1, "todo": "Have breakfast", "status": true },
+    { "id": 2, "todo": "Have lunch", "status": false }
+]

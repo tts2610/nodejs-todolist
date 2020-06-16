@@ -1,0 +1,9 @@
+[{
+        "todo": "HAVE BREAKFAST",
+        "status": true
+    },
+    {
+        "todo": "HAVE LUNCH",
+        "status": false
+    }
+]

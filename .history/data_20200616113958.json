@@ -1,0 +1,5 @@
+[
+    { "todo": "Have breakfast", "status": true },
+    { "todo": "Have lunch", "status": false },
+    { "todo": "grab lunch", "status": false }
+]
