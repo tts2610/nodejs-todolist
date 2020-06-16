@@ -1,6 +1,7 @@
 const fs = require("fs");
 const yargs = require("yargs");
 const chalk = require("chalk");
+let params = process.argv;
 
 function loadData(status) {
   try {

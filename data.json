@@ -1,11 +1,1 @@
-[{
-        "id": 1,
-        "todo": "HAVE BREAKFAST",
-        "status": true
-    },
-    {
-        "id": 2,
-        "todo": "HAVE LUNCH",
-        "status": false
-    }
-]
+[{"id":1,"todo":"HAVE BREAKFAST","status":true},{"id":2,"todo":"HAVE LUNCH","status":true},{"id":3,"todo":"finish class","status":false}]

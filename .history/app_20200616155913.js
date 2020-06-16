@@ -1,6 +1,7 @@
 const fs = require("fs");
 const yargs = require("yargs");
 const chalk = require("chalk");
+let params = process.argv;
 
 function loadData(status) {
   try {
@@ -25,7 +26,7 @@ function loadData(status) {
 }
 
 function addTodo(obj) {
-  const data = loadData("all");
+  const data = loadData();
   data.push(obj);
   saveData(data);
 }
@@ -35,7 +36,7 @@ function saveData(data) {
 }
 
 function deleteTodo(id) {
-  const data = loadData("all");
+  const data = loadData();
   data.splice(id - 1, 1);
   saveData(data);
 }
@@ -44,24 +45,11 @@ function deleteAll() {
   saveData([]);
 }
 
-function deleteByStatus(status) {
-  let data = loadData("all");
-  if (status === "complete") {
-    data = data.filter((item) => !item.status);
-  } else if (status === "incomplete") {
-    data = data.filter((item) => item.status);
-  } else {
-    return false;
-  }
-  saveData(data);
-  return true;
-}
-
 function toogleTodo(id) {
-  const data = loadData("all");
+  const data = loadData();
   data.forEach((item) => {
     if (item.id === id) {
-      item.status = item.status ? false : true;
+      item.status = item.status ? !item.status : item.status;
     }
   });
   saveData(data);
@@ -118,7 +106,7 @@ yargs.command({
     },
   },
   handler: function ({ todo, status }) {
-    let data = loadData("all");
+    let data = loadData();
     let obj = { id: data.length + 1, todo, status };
     addTodo(obj);
     console.log(
@@ -148,13 +136,8 @@ yargs.command({
       demandOption: false,
       type: "int",
     },
-    status: {
-      describe: "complete | incomplete",
-      demandOption: false,
-      type: "string",
-    },
   },
-  handler: function ({ id, status }) {
+  handler: function ({ id }) {
     if (id) {
       deleteTodo(id);
       console.log(
@@ -172,26 +155,6 @@ yargs.command({
           "============================================================================================================================================="
         )
       );
-    } else if (status) {
-      if (deleteByStatus(status)) {
-        console.log(
-          chalk.blue(
-            "============================================================================================================================================="
-          )
-        );
-        console.log(
-          chalk.blue(
-            `${"                                                      "}ALL "${status}" TODOS HAS BEEN REMOVED!`
-          )
-        );
-        console.log(
-          chalk.blue(
-            "============================================================================================================================================="
-          )
-        );
-      } else {
-        console.log(chalk.red("ONLY --status= complete | incomplete allowed"));
-      }
     } else {
       deleteAll();
       console.log(
@@ -223,24 +186,7 @@ yargs.command({
       type: "int",
     },
   },
-  handler: function ({ id }) {
-    toogleTodo(id);
-    console.log(
-      chalk.blue(
-        "============================================================================================================================================="
-      )
-    );
-    console.log(
-      chalk.blue(
-        `${"                                                      "}TOGGLED ID NUMBER ${id}`
-      )
-    );
-    console.log(
-      chalk.blue(
-        "============================================================================================================================================="
-      )
-    );
-  },
+  handler: function ({ id }) {},
 });
 
 yargs.parse();

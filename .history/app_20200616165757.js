@@ -1,6 +1,7 @@
 const fs = require("fs");
 const yargs = require("yargs");
 const chalk = require("chalk");
+let params = process.argv;
 
 function loadData(status) {
   try {
@@ -25,7 +26,7 @@ function loadData(status) {
 }
 
 function addTodo(obj) {
-  const data = loadData("all");
+  const data = loadData();
   data.push(obj);
   saveData(data);
 }
@@ -35,7 +36,7 @@ function saveData(data) {
 }
 
 function deleteTodo(id) {
-  const data = loadData("all");
+  const data = loadData();
   data.splice(id - 1, 1);
   saveData(data);
 }

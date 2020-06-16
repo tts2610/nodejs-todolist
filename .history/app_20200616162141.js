@@ -1,6 +1,7 @@
 const fs = require("fs");
 const yargs = require("yargs");
 const chalk = require("chalk");
+let params = process.argv;
 
 function loadData(status) {
   try {
@@ -25,7 +26,7 @@ function loadData(status) {
 }
 
 function addTodo(obj) {
-  const data = loadData("all");
+  const data = loadData();
   data.push(obj);
   saveData(data);
 }
@@ -35,7 +36,7 @@ function saveData(data) {
 }
 
 function deleteTodo(id) {
-  const data = loadData("all");
+  const data = loadData();
   data.splice(id - 1, 1);
   saveData(data);
 }
@@ -118,7 +119,7 @@ yargs.command({
     },
   },
   handler: function ({ todo, status }) {
-    let data = loadData("all");
+    let data = loadData();
     let obj = { id: data.length + 1, todo, status };
     addTodo(obj);
     console.log(
@@ -190,7 +191,6 @@ yargs.command({
           )
         );
       } else {
-        console.log(chalk.red("ONLY --status= complete | incomplete allowed"));
       }
     } else {
       deleteAll();
